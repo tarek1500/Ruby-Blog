@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user, except: [:index, :show]
+	before_action :authenticate_user!
 
 	def index
 		@articles = Article.all
@@ -15,12 +15,13 @@ class ArticlesController < ApplicationController
 
 	def edit
 		@article = Article.find(params[:id])
+		authorize! :read, @article
 	end
 
 	def create
-		@article = Article.new(article_params)
+		@article = current_user.articles.create(article_params)
 
-		if @article.save
+		if @article.valid?
 			redirect_to @article
 		else
 			render 'new'
@@ -29,6 +30,7 @@ class ArticlesController < ApplicationController
 
 	def update
 		@article = Article.find(params[:id])
+		authorize! :read, @article
 
 		if @article.update(article_params)
 			redirect_to @article
@@ -39,6 +41,7 @@ class ArticlesController < ApplicationController
 
 	def destroy
 		@article = Article.find(params[:id])
+		authorize! :read, @article
 		@article.destroy
 
 		redirect_to articles_path

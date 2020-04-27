@@ -1,26 +1,16 @@
 class ApplicationController < ActionController::Base
-	before_action :authenticate_user, :only => [:home, :profile, :setting]
-	before_action :save_login_state, :only => [:login, :login_attempt]
+	before_action :configure_permitted_parameters, if: :devise_controller?
 
-	protected def authenticate_user
-		if session[:user_id]
-			@current_user = User.find(session[:user_id])
+	# rescue_from CanCan::AccessDenied do |exception|
+	# 	respond_to do |format|
+	# 		format.json { head :forbidden, content_type: 'text/html' }
+	# 		format.html { redirect_to main_app.root_url, notice: exception.message }
+	# 		format.js   { head :forbidden, content_type: 'text/html' }
+	# 	end
+	# end
 
-			return true
-		else
-			redirect_to(:controller => 'sessions', :action => 'login')
-
-			return false
-		end
-	end
-
-	def save_login_state
-		if session[:user_id]
-			redirect_to(:controller => 'sessions', :action => 'home')
-
-			return false
-		else
-			return true
-		end
+	protected
+	def configure_permitted_parameters
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
 	end
 end

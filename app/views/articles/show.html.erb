@@ -6,6 +6,10 @@
 	<strong>Text:</strong>
 	<%= @article.text %>
 </p>
+<p>
+	<strong>Author:</strong>
+	<%= @article.user.username %>
+</p>
 
 <h2>Comments</h2>
 <%= render @article.comments %>
