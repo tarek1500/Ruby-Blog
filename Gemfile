@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'
+gem 'jwt'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

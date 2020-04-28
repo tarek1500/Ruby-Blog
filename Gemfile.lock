@@ -92,6 +92,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jwt (2.2.1)
     loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -213,6 +214,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise (~> 4.2)
   jbuilder (~> 2.7)
+  jwt
   mysql2 (>= 0.4.4)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.2)
